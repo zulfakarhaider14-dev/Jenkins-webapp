@@ -31,17 +31,17 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    # Ensure Maven builds from the subfolder
+    # 1. Build the project first
     - name: Build with Maven
       run: mvn -B package --file zulfakarhaider14-dev/Jenkins-webapp/pom.xml
 
+    # 2. Submit the graph (Only need this once!)
     - name: Submit Dependency Graph
       uses: advanced-security/maven-dependency-submission-action@v4
       with:
-        # Crucial: This must be the folder containing pom.xml
         directory: 'zulfakarhaider14-dev/Jenkins-webapp'
-        # Ignore wrapper if it's missing or causing ENOTDIR errors
-        ignore-maven-wrapper: true 
+        ignore-maven-wrapper: 'true'
+
 
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
