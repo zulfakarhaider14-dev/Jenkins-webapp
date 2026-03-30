@@ -38,7 +38,7 @@ jobs:
       uses: advanced-security/maven-dependency-submission-action@v4
       with:
         # Change this if your pom.xml is in a subfolder
-        directory: 'pom.xml'
+        directory: .
       
       # This action now has the environment it needs to scan your pom.xml
 
