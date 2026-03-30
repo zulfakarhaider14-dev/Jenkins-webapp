@@ -39,7 +39,7 @@ jobs:
     - name: Submit Dependency Graph
       uses: advanced-security/maven-dependency-submission-action@v4
       with:
-        directory: 'pom.xml'
+        directory: '.'
         ignore-maven-wrapper: 'true'
 
 
