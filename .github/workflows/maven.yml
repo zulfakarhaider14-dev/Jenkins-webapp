@@ -18,7 +18,7 @@ jobs:
   build-and-submit:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Correctly indented under permissions
+      contents: write
 
     steps:
     - name: Checkout code
@@ -31,16 +31,18 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    # Ensure Maven builds from the subfolder
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package --file zulfakarhaider14-dev/Jenkins-webapp/pom.xml
 
     - name: Submit Dependency Graph
       uses: advanced-security/maven-dependency-submission-action@v4
       with:
-        # Change this if your pom.xml is in a subfolder
+        # Crucial: This must be the folder containing pom.xml
         directory: 'zulfakarhaider14-dev/Jenkins-webapp'
-      
-      # This action now has the environment it needs to scan your pom.xml
+        # Ignore wrapper if it's missing or causing ENOTDIR errors
+        ignore-maven-wrapper: true 
+
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
